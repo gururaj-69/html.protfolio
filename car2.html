@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interest Calculator</title>
+    <link rel="stylesheet" href="car2.css" />
+    <script src="my.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#calculate").click(function () {
+          // Get user input
+          var principal = parseFloat($("#principal").val());
+          var rate = parseFloat($("#rate").val());
+          var time = parseFloat($("#time").val());
+          var interestType = $("input[name='interestType']:checked").val();
+
+          // Calculate interest
+          var interest = 0;
+          if (interestType === "simple") {
+            interest = (principal * rate * time) / 100;
+          } else if (interestType === "compound") {
+            interest = principal * (Math.pow(1 + rate / 100, time) - 1);
+          }
+
+          // Display the result
+          $("#result").text("Interest: $" + interest.toFixed(2));
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Interest Calculator</h1>
+    <div>
+      <label for="principal">Principal Amount:</label>
+      <input
+        type="number"
+        id="principal"
+        placeholder="Enter principal amount"
+      />
+    </div>
+    <div>
+      <label for="rate">Interest Rate (%):</label>
+      <input type="number" id="rate" placeholder="Enter interest rate" />
+    </div>
+    <div>
+      <label for="time">Time (years):</label>
+      <input type="number" id="time" placeholder="Enter time in years" />
+    </div>
+    <div>
+      <label for="interestType">Interest Type:</label>
+      <input
+        type="radio"
+        id="simpleInterest"
+        name="interestType"
+        value="simple"
+        checked
+      />
+      <label for="simpleInterest">Simple</label>
+      <input
+        type="radio"
+        id="compoundInterest"
+        name="interestType"
+        value="compound"
+      />
+      <label for="compoundInterest">Compound</label>
+    </div>
+    <button id="calculate">Calculate Interest</button>
+    <p id="result"></p>
+  </div>
+  <br>
+  <br>
+  
+
+  </body>
+</html>
